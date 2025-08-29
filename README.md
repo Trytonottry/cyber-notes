@@ -97,7 +97,7 @@
 ## 📬 Автор
 
 👤 **Trytonottry**  
-📧 [trytonottry@example.com](mailto:popovsemyona@gmail.com)  
+📧 [popovsemyona@gmail.com](mailto:popovsemyona@gmail.com)  
 🐙 [GitHub Profile](https://github.com/Trytonottry)
 
 ---
