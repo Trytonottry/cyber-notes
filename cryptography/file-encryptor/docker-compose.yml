@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  encryptor:
+    build: .
+    volumes:
+      - ./keys:/app/keys
+      - ./data:/app/data
+    command: python -m app.cli
+    stdin_open: true
+    tty: true
